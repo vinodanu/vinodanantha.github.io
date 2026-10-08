@@ -1,0 +1,769 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Future Projects Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-bleed hero with a live role line and stat row, a tech marquee,
+   then a filterable project grid and a contact panel.
+   Palette: graphite ink, warm signal amber, one mint for shipped work. */
+:root {
+  --bg: #0B0D10;
+  --surface: #13171C;
+  --surface-2: #1A2027;
+  --fg: #EEF0F3;
+  --muted: #9AA3AF;
+  --line: #262C34;
+  --accent: #F5C451;
+  --accent-ink: #1A1405;
+  --ok: #5BD3A0;
+  --warm: #FF8A65;
+  --idea: #8C96A3;
+  --font-display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Geist", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F7F7F4;
+    --surface: #FFFFFF;
+    --surface-2: #EFEFEA;
+    --fg: #111418;
+    --muted: #5C6470;
+    --line: #DCDCD5;
+    --accent: #B7791F;
+    --accent-ink: #FFFFFF;
+    --ok: #1F8A5F;
+    --warm: #C2562B;
+    --idea: #6B7480;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #F7F7F4;
+  --surface: #FFFFFF;
+  --surface-2: #EFEFEA;
+  --fg: #111418;
+  --muted: #5C6470;
+  --line: #DCDCD5;
+  --accent: #B7791F;
+  --accent-ink: #FFFFFF;
+  --ok: #1F8A5F;
+  --warm: #C2562B;
+  --idea: #6B7480;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(60% 40% at 80% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+  z-index: -1;
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  padding-block: 20px 56px;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding-block: 56px 40px;
+  display: grid;
+  gap: 20px;
+}
+.hero > * { animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero > :nth-child(2) { animation-delay: 0.08s; }
+.hero > :nth-child(3) { animation-delay: 0.16s; }
+.hero > :nth-child(4) { animation-delay: 0.24s; }
+.hero > :nth-child(5) { animation-delay: 0.32s; }
+.hero > :nth-child(6) { animation-delay: 0.4s; }
+.hero > :nth-child(7) { animation-delay: 0.48s; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+.availability {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 14px 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent);
+  animation: ping 2s ease-out infinite;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.6rem, 13vw, 9.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+.role {
+  font-family: var(--font-mono);
+  font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+  color: var(--accent);
+  margin: 0;
+  min-height: 1.6em;
+}
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--accent);
+  animation: blink 1s steps(1) infinite;
+}
+.lede {
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.btn {
+  font: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.btn.primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--fg)); }
+
+.stats {
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.stats > div {
+  background: var(--surface);
+  padding: 18px 20px;
+}
+.stats dt {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.stats dd {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Marquee ---------- */
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  padding-block: 16px;
+  margin-inline: -16px;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.marquee:hover .track { animation-play-state: paused; }
+.track span {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.track span::after {
+  content: "✦";
+  margin-left: 40px;
+  color: var(--accent);
+  font-size: 0.6em;
+  vertical-align: middle;
+}
+
+/* ---------- Projects ---------- */
+.projects { padding-block: 72px 16px; }
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+h2.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 6px 0 0;
+  line-height: 1.05;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+.count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 16px;
+}
+.card {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.3s ease;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(260px circle at var(--mx) var(--my), color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.card:hover::before { opacity: 1; }
+.card > * { position: relative; }
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
+  }
+}
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  text-wrap: balance;
+}
+.card p { margin: 0; color: var(--muted); }
+.status {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 6px;
+}
+.status[data-s="progress"]  { background: color-mix(in srgb, var(--warm) 16%, transparent); color: var(--warm); }
+.status[data-s="planned"]   { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
+.status[data-s="idea"]      { background: var(--surface-2); color: var(--idea); }
+.status[data-s="completed"] { background: var(--ok); color: var(--bg); }
+.next {
+  font-size: 14px;
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+}
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+.stack li {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--surface-2);
+  border-radius: 6px;
+  padding: 3px 8px;
+  color: var(--fg);
+}
+.empty { grid-column: 1 / -1; color: var(--muted); }
+
+/* ---------- Contact ---------- */
+.contact {
+  margin-top: 72px;
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  display: grid;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.contact::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  right: -120px;
+  top: -140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 35%, transparent), transparent 70%);
+  animation: drift 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.contact h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+.contact p { margin: 0; color: var(--muted); }
+.copy-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.copy-row code {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.copy-status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  min-height: 1em;
+  margin: 0;
+}
+
+footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------- Motion ---------- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+@keyframes ping {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent); }
+  80%, 100% { box-shadow: 0 0 0 10px transparent; }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes drift {
+  to { transform: translate(-40px, 30px) scale(1.1); }
+}
+
+/* Scroll-linked reveal: only runs where the browser supports it, so content
+   is never left hidden when scroll timelines are unavailable. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+  .grid > .card {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .marquee { margin-inline: -16px; }
+  .track { gap: 28px; }
+}
+</style>
+
+<main class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Senior Java Engineer · Bengaluru, India</p>
+    <span class="availability"><span class="dot" aria-hidden="true"></span>Open to senior Java roles</span>
+    <h1>Vinod</h1>
+    <p class="role" aria-live="off"><span id="typed">Java 17 backend engineer</span><span class="caret" aria-hidden="true"></span></p>
+    <p class="lede">I build event-driven backends on Java 17 and Spring Boot, with Kafka, PostgreSQL, Docker and AWS. My recent work includes a microservices resume analyzer and a GraphQL API.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">See my projects</a>
+      <a class="btn" href="https://github.com/vinodanu" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/vinod-kumar-anantha-6b5bba214" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <dl class="stats">
+      <div><dt>Years building Java systems</dt><dd><span data-count="4">4</span>+</dd></div>
+      <div><dt>Completed projects</dt><dd><span data-count="3">3</span></dd></div>
+      <div><dt>Core platform</dt><dd>Spring Boot</dd></div>
+    </dl>
+  </header>
+</main>
+
+<section class="marquee" aria-label="Technologies">
+  <div class="track" id="track"></div>
+</section>
+
+<main class="wrap">
+  <section class="projects reveal" id="projects" aria-labelledby="projects-title">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Selected work</p>
+        <h2 class="section-title" id="projects-title">Projects</h2>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="filters" role="group" aria-label="Filter projects by stage">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-filter="completed" aria-pressed="false">Completed</button>
+        <button class="chip" type="button" data-filter="progress" aria-pressed="false">In progress</button>
+        <button class="chip" type="button" data-filter="planned" aria-pressed="false">Planned</button>
+        <button class="chip" type="button" data-filter="idea" aria-pressed="false">Idea</button>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="contact reveal" aria-labelledby="contact-title">
+    <p class="eyebrow">Get in touch</p>
+    <h2 id="contact-title">Hiring for Java backend or platform work? Let's talk.</h2>
+    <p>Email is the fastest way to reach me. Copy the address below.</p>
+    <div class="copy-row">
+      <code id="email">anantavinodkumar@outlook.com</code>
+      <button class="btn primary" type="button" id="copy">Copy email</button>
+    </div>
+    <p class="copy-status" id="copy-status" role="status"></p>
+  </section>
+
+  <footer>
+    Completed projects come from my GitHub repositories. Planned, in-progress and idea entries are placeholders to replace with your own.
+  </footer>
+</main>
+
+<script>
+/* Edit this list to add, remove or move projects.
+   status: "completed" | "progress" | "planned" | "idea" */
+const PROJECTS = [
+  {
+    title: "ATS Score Checker",
+    status: "completed",
+    summary: "Microservices app that scores a resume against a job description, shows keyword and formatting gaps, and generates an ATS-optimized PDF.",
+    stack: ["Spring Boot 3.2", "Spring Cloud Gateway", "JWT", "MySQL", "MongoDB", "Apache PDFBox", "React 18", "Docker"],
+    next: "Repo: github.com/vinodanu/ATS"
+  },
+  {
+    title: "MyVaccination GraphQL API",
+    status: "completed",
+    summary: "GraphQL API for patient and administrator records, built with Express and Mongoose.",
+    stack: ["Node.js", "Express", "GraphQL", "MongoDB", "Mongoose"],
+    next: "Repo: github.com/vinodanu/myvacciation-graphql"
+  },
+  {
+    title: "E-commerce Website",
+    status: "completed",
+    summary: "Single-page shopping front end with Material UI components and a component-based React structure.",
+    stack: ["React 18", "Material UI", "Create React App"],
+    next: "Repo: github.com/vinodanu/e-commerce-website"
+  },
+  {
+    title: "Order ledger with transactional outbox",
+    status: "progress",
+    summary: "Order and ledger services exchange events over Kafka. An outbox table keeps database writes and event publishing consistent.",
+    stack: ["Java 17", "Spring Boot 3", "Kafka", "PostgreSQL", "Testcontainers"],
+    next: "Next: idempotent consumers and replay tests."
+  },
+  {
+    title: "API gateway with JWT and rate limits",
+    status: "planned",
+    summary: "Edge service that validates tokens, applies per-client rate limits and routes traffic to downstream services.",
+    stack: ["Spring Cloud Gateway", "OAuth2", "Redis", "Resilience4j"],
+    next: "Next: design the token caching strategy."
+  },
+  {
+    title: "Batch reconciliation service",
+    status: "planned",
+    summary: "Nightly job that matches trade files against internal records and reports breaks for review.",
+    stack: ["Spring Batch", "Java records", "AWS S3", "PostgreSQL"],
+    next: "Next: define the break classification rules."
+  },
+  {
+    title: "Observability starter",
+    status: "idea",
+    summary: "A Spring Boot starter that adds tracing, structured logs and business metrics with one dependency.",
+    stack: ["Micrometer", "OpenTelemetry", "Grafana"],
+    next: "Next: decide which metrics every service must emit."
+  }
+];
+
+const TECH = ["Java 17", "Spring Boot", "Microservices", "Apache Kafka", "PostgreSQL", "MongoDB", "Docker", "Kubernetes", "AWS", "GraphQL", "REST", "JWT / OAuth2"];
+const STAGE_LABEL = { completed: "Completed", progress: "In progress", planned: "Planned", idea: "Idea" };
+const ROLES = ["Java 17 backend engineer", "Spring Boot microservices builder", "Kafka and event-driven systems"];
+
+/* ---- Marquee: duplicate the list so the loop is seamless ---- */
+const track = document.getElementById("track");
+for (const label of [...TECH, ...TECH]) {
+  const item = document.createElement("span");
+  item.textContent = label;
+  track.append(item);
+}
+
+/* ---- Typewriter role line (static text is already in the HTML) ---- */
+const typed = document.getElementById("typed");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!reduceMotion) {
+  let roleIndex = 0;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  (async () => {
+    while (true) {
+      await wait(2200);
+      const next = ROLES[(roleIndex + 1) % ROLES.length];
+      for (let i = typed.textContent.length; i >= 0; i--) {
+        typed.textContent = ROLES[roleIndex].slice(0, i);
+        await wait(22);
+      }
+      roleIndex = (roleIndex + 1) % ROLES.length;
+      for (let i = 1; i <= next.length; i++) {
+        typed.textContent = next.slice(0, i);
+        await wait(40);
+      }
+    }
+  })();
+}
+
+/* ---- Count-up stats ---- */
+if (!reduceMotion) {
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const target = Number(el.dataset.count);
+    const start = performance.now();
+    const duration = 1200;
+    el.textContent = "0";
+    const step = now => {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+
+/* ---- Projects ---- */
+const grid = document.getElementById("grid");
+const countEl = document.getElementById("count");
+const filterButtons = document.querySelectorAll("[data-filter]");
+let currentFilter = "all";
+
+function buildCard(project) {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  card.addEventListener("pointermove", e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    card.style.setProperty("--my", `${e.clientY - r.top}px`);
+  });
+
+  const status = document.createElement("span");
+  status.className = "status";
+  status.dataset.s = project.status;
+  status.textContent = STAGE_LABEL[project.status] ?? project.status;
+
+  const title = document.createElement("h3");
+  title.textContent = project.title;
+
+  const summary = document.createElement("p");
+  summary.textContent = project.summary;
+
+  const next = document.createElement("p");
+  next.className = "next";
+  next.textContent = project.next;
+
+  const stack = document.createElement("ul");
+  stack.className = "stack";
+  stack.setAttribute("aria-label", "Technologies");
+  for (const tech of project.stack) {
+    const item = document.createElement("li");
+    item.textContent = tech;
+    stack.append(item);
+  }
+
+  card.append(status, title, summary, next, stack);
+  return card;
+}
+
+function render() {
+  const visible = currentFilter === "all"
+    ? PROJECTS
+    : PROJECTS.filter(p => p.status === currentFilter);
+
+  grid.replaceChildren();
+
+  if (visible.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "empty";
+    empty.textContent = "Nothing at this stage yet.";
+    grid.append(empty);
+  } else {
+    grid.append(...visible.map(buildCard));
+  }
+
+  countEl.textContent = `${visible.length} of ${PROJECTS.length} projects`;
+}
+
+filterButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+    filterButtons.forEach(b => b.setAttribute("aria-pressed", String(b === button)));
+    render();
+  });
+});
+
+render();
+
+/* ---- Copy email: works from a click; falls back to selecting the text ---- */
+const copyBtn = document.getElementById("copy");
+const copyStatus = document.getElementById("copy-status");
+copyBtn.addEventListener("click", async () => {
+  const email = document.getElementById("email").textContent.trim();
+  try {
+    await navigator.clipboard.writeText(email);
+    copyStatus.textContent = "Email copied.";
+  } catch {
+    const range = document.createRange();
+    range.selectNodeContents(document.getElementById("email"));
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    copyStatus.textContent = "Press Ctrl+C or Cmd+C to copy the selected email.";
+  }
+});
+</script>
+
+</body></html>
